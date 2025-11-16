@@ -159,6 +159,8 @@ class ContextEntityRecall(MetricWithLLM, SingleTurnMetric):
         ground_truth, contexts = row["reference"], row["retrieved_contexts"]
         ground_truth = await self.get_entities(ground_truth, callbacks=callbacks)
         contexts = await self.get_entities("\n".join(contexts), callbacks=callbacks)
+        print(ground_truth)
+        print(contexts)
         return self._compute_score(ground_truth.entities, contexts.entities)
 
 

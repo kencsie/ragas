@@ -160,10 +160,14 @@ class LLMContextPrecisionWithReference(MetricWithLLM, SingleTurnMetric):
 
             responses.append([result.model_dump() for result in verdicts])
 
+        print(responses, end="\n\n")
+
         answers = []
         for response in responses:
             agg_answer = ensembler.from_discrete([response], "verdict")
             answers.append(Verification(**agg_answer[0]))
+
+        print(answers)
 
         score = self._calculate_average_precision(answers)
         return score

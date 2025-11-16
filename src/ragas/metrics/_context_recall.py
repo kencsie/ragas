@@ -143,11 +143,13 @@ class LLMContextRecall(MetricWithLLM, SingleTurnMetric):
             llm=self.llm,
             callbacks=callbacks,
         )
+        print(classifications_list, end="\n\n")
         classification_dicts = []
         for classification in classifications_list:
             classification_dicts.append(
                 [clasif.model_dump() for clasif in classification.classifications]
             )
+        print(classification_dicts)
 
         ensembled_clasif = ensembler.from_discrete(classification_dicts, "attributed")
 

@@ -206,11 +206,13 @@ class Faithfulness(MetricWithLLM, SingleTurnMetric):
         assert self.llm is not None, "LLM is not set"
 
         statements = await self._create_statements(row, callbacks)
+        print(statements)
         statements = statements.statements
         if statements == []:
             return np.nan
 
         verdicts = await self._create_verdicts(row, statements, callbacks)
+        print(verdicts)
         return self._compute_score(verdicts)
 
 

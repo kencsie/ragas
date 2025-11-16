@@ -90,11 +90,15 @@ class SemanticSimilarity(MetricWithEmbeddings, SingleTurnMetric):
                 # Legacy interface (BaseRagasEmbeddings)
                 embedding_1 = np.array(await self.embeddings.embed_text(ground_truth))  # type: ignore[misc]
                 embedding_2 = np.array(await self.embeddings.embed_text(answer))  # type: ignore[misc]
+            print(embedding_1)
+            print(embedding_2)
             # Normalization factors of the above embeddings
             norms_1 = np.linalg.norm(embedding_1, keepdims=True)
             norms_2 = np.linalg.norm(embedding_2, keepdims=True)
             embedding_1_normalized = embedding_1 / norms_1
             embedding_2_normalized = embedding_2 / norms_2
+            print(embedding_1_normalized)
+            print(embedding_2_normalized)
             similarity = embedding_1_normalized @ embedding_2_normalized.T
             score = similarity.flatten()
 

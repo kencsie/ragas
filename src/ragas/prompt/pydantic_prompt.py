@@ -225,6 +225,17 @@ class PydanticPrompt(BasePrompt, t.Generic[InputModel, OutputModel]):
             callbacks=callbacks,
             metadata={"type": ChainType.RAGAS_PROMPT},
         )
+
+        # <<<--- 在這裡加上 print 語句 ---<<<
+        # 1. 呼叫 to_string() 來生成完整的 prompt
+        full_prompt_string = self.to_string(processed_data)
+        
+        # 2. 把它印出來，加上分隔線方便查看
+        print("這次使用的prompt".center(80, "-"))
+        print(full_prompt_string)
+        print("-" * 80, end='\n\n')
+        # <<<-----------------------------------<<<
+
         prompt_value = PromptValue(text=self.to_string(processed_data))
 
         # Handle both LangChain LLMs and Ragas LLMs
